@@ -42,6 +42,8 @@ function ZhuanPan_moCentre(obj){
     this.theDeg = 0;//每次需要走的距离
     this.regDict = {};
 
+    this.oldId = null;
+
     this.innerText = obj.innerText;
     this.innerTextColor = obj.innerTextColor;
     this.dizuo = obj.dizuo;
@@ -332,7 +334,13 @@ ZhuanPan_moCentre.prototype = {
             this.hasJudged = true
             for (var i = 0; i < this.zhuanPanNum; i++) {
                 if (this.texts[i].id == this.prizeId) {
-                     this.theDeg = Math.PI * (3 / 2) - this.regDict[i][1] % (Pi2) > 0 ? (Math.PI * (3 / 2) - this.regDict[i][1] % (Pi2) + theSingleDeg / 2) + theDefaultDeg : ( Pi2 - (this.regDict[i][0] % (Pi2) + this.regDict[i][1] % (Pi2)) / 2 + Math.PI * (3 / 2)) + theDefaultDeg//计算角度的函数
+                    if(!this.oldId){
+                        this.theDeg = Math.PI * (3 / 2) - this.regDict[i][1] % (Pi2) > 0 ? (Math.PI * (3 / 2) - this.regDict[i][1] % (Pi2) + theSingleDeg / 2) + theDefaultDeg : ( Pi2 - (this.regDict[i][0] % (Pi2) + this.regDict[i][1] % (Pi2)) / 2 + Math.PI * (3 / 2)) + theDefaultDeg//计算角度的函数
+                    }else{
+                        console.log(this.zhuanPanNum - (this.prizeId - this.oldId))
+                        this.theDeg = theDefaultDeg + (this.zhuanPanNum - (this.prizeId - this.oldId)) * theSingleDeg
+                        console.log(this.oldId)
+                    }
                     this.allDegOnce += this.theDeg;//总路程
                     for (var r = 0; r < this.zhuanPanNum; r++) {
                         this.regDict[r][0] += this.theDeg;
@@ -356,7 +364,8 @@ ZhuanPan_moCentre.prototype = {
                 this.RotateDeg += speed
 
             } else {
-                console.log(this.regDict)
+                this.oldId = this.prizeId;
+                this.prizeId = null;
                 this.allDegOnce = 0;
                 this.ableToRotate = false;
                 this.hasJudged = false
