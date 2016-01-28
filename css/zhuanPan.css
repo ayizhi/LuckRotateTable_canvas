@@ -299,7 +299,7 @@ body{
     background: url('../img/bgUpper.png') no-repeat;
     -webkit-background-size: 100% auto;
     background-size: 100% auto;
-    padding-top: 4.9rem;
+    padding-top: 5.5rem;
 
 }
 .jiangPinNeiRong ul{
@@ -313,10 +313,10 @@ body{
     border-bottom: 1px solid rgba(0,0,0,0.3);
 }
 .huoDongGuiZe{
-    height: 17.5rem;
+    height: 15.5rem;
     background: #badd99 url("../img/bgBlow.png") no-repeat;
-    -webkit-background-size: 100% auto;
-    background-size: 100% auto;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
     padding-top: 3.8rem;
     color:rgba(0,0,0,0.7)
 
